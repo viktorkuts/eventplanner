@@ -1,0 +1,139 @@
+@startuml
+
+!define ENTITY(name) entity name <<Entity>>
+!define VO(name) class name <<Value Object>>
+
+skinparam Rectangle {
+    BackgroundColor PapayaWhip
+}
+
+rectangle "Event Planner" as BoundedContextEventPlanner #line.dashed{
+    Package "User Subdomain" #LavenderBlush{
+        ENTITY(User) <<Aggregate Root>>{
+            firstName: String
+            lastName: String
+            dob: Date
+            email: String
+            phone: String
+        }
+
+        VO(UserIdentifier){
+            userId: UUID
+        }
+
+        ENTITY(Performer){
+            stageName: String
+        }
+
+        User "1" *--> "1" Performer
+        User "1" o--> "1" UserIdentifier
+        Performer "1" o--> "1" UserIdentifier
+    }
+
+    Package "Event Management Subdomain" #LightCyan {
+        ENTITY(Event) {
+            startsAt: DateTime
+            endsAt: DateTime
+            eventType:
+        }
+
+        VO(EventIdentifier){
+            eventId: UUID
+        }
+
+        Event "1" *--> "1" EventIdentifier
+    }
+
+    Package "Venue Management Subdomain" #Linen {
+        ENTITY(Venue) {
+            location: VenueAddress
+            venueName: String
+        }
+
+        VO(VenueIdentifier) {
+            venueId: UUID
+        }
+
+        VO(VenueAddress){
+            unitNumber: Integer
+            street: String
+            city: String
+            province: String
+            country: String
+        }
+
+        Venue "1" o--> "1" VenueAddress
+        Venue "1" *--> "1" VenueIdentifier
+    }
+
+    Package "Ticketing Subdomain" #LightGreen {
+        ENTITY(Ticket) {
+            purchaseTime: DateTime
+            linkedEvent: Event
+            ticketOwner: User
+        }
+
+        VO(TicketIdentifier) {
+            ticketId: UUID
+        }
+
+        Ticket "1" *--> "1" TicketIdentifier
+    }
+
+    Package "Reservation Subdomain" #HoneyDew {
+        ENTITY(Reservation) {
+            startTime: DateTime
+            endTime: DateTime
+        }
+
+        VO(ReservationIdentifier) {
+            reservationId: UUID
+        }
+
+        Reservation *--> ReservationIdentifier
+    }
+
+    Package "Payment Subdomain" #LightCoral {
+        VO(Purchasable) {
+            price: Double
+        }
+
+        ENTITY(Transaction) {
+            purchaseCompleteTime: DateTime
+        }
+
+        VO(TransactionIdentifier) {
+            transactionId: UUID
+        }
+
+        enum TransactionPurpose <<Enumeration>>{
+            VENUE, TICKET
+        }
+
+        enum PaymentMethod <<Enumeration>> {
+            ETRANSFER, PAYPAL, CC, CASH
+        }
+
+        Transaction "1" *--> "1" TransactionIdentifier
+        Transaction "1" *--> "1" TransactionPurpose
+        Transaction "1" *--> "1" PaymentMethod
+        Purchasable "..*" *-> "1" Transaction
+    }
+
+    User --> TicketIdentifier
+    Performer --> EventIdentifier
+    Event --> VenueIdentifier
+    Ticket --> EventIdentifier
+
+    Reservation --> EventIdentifier
+    Reservation --> VenueIdentifier
+
+    Purchasable *--> TicketIdentifier
+    Purchasable *--> VenueIdentifier
+
+    TransactionIdentifier o--> User
+}
+
+
+
+@enduml
