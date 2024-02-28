@@ -21,6 +21,7 @@ public interface PerformerResponseMapper {
     @Mapping(expression = "java(performer.getPerformerIdentifier().getPerformerId())", target = "performerId")
     PerformerResponseModel entityToResponseModel(Performer performer);
     List<PerformerResponseModel> entityListToResponseModelList(List<Performer> performerList);
+
     @AfterMapping
     default void addLinks(@MappingTarget PerformerResponseModel responseModel, Performer performer){
         Link selfLink = linkTo(methodOn(PerformerController.class).get(responseModel.getPerformerId())).withSelfRel();

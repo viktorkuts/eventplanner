@@ -1,9 +1,11 @@
 package com.viktorkuts.eventplanner.usersubdomain.presentationlayer.Models;
 
+import com.viktorkuts.eventplanner.eventmanagementsubdomain.dataaccesslayer.Event;
 import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -17,4 +19,5 @@ public class PerformerResponseModel extends RepresentationModel<PerformerRespons
     private Date dob;
     private String email;
     private String phone;
+//    private List<Event> eventList;
 }

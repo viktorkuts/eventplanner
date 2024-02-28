@@ -42,6 +42,6 @@ public class PerformerController {
     @DeleteMapping(value = "{performerId}")
     public ResponseEntity<Void> delete(@PathVariable String performerId){
         performerService.deletePerformer(performerId);
-        return ResponseEntity.ok().body(null);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
 }

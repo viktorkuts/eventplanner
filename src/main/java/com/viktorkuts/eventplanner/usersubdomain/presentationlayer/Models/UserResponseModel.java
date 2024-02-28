@@ -1,9 +1,11 @@
 package com.viktorkuts.eventplanner.usersubdomain.presentationlayer.Models;
 
+import com.viktorkuts.eventplanner.eventmanagementsubdomain.dataaccesslayer.Event;
 import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
