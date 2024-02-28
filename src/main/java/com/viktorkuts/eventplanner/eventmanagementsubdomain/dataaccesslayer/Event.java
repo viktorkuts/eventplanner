@@ -1,6 +1,7 @@
 package com.viktorkuts.eventplanner.eventmanagementsubdomain.dataaccesslayer;
 
 import com.viktorkuts.eventplanner.usersubdomain.dataaccesslayer.Performer;
+import com.viktorkuts.eventplanner.usersubdomain.dataaccesslayer.PerformerIdentifier;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,7 @@ public class Event {
     @Column(name = "eventtype")
     @Enumerated(EnumType.STRING)
     private EventType eventType;
+
 
 //    @ManyToOne
 //    @JoinColumn(name = "performerid")

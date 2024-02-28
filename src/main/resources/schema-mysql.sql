@@ -1,10 +1,12 @@
 DROP TABLE IF EXISTS tickets;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS venues;
 DROP TABLE IF EXISTS events;
 DROP TABLE IF EXISTS performers;
+
 create table users (
                        id INT AUTO_INCREMENT,
-                       userid VARCHAR(50),
+                       userid VARCHAR(50) NOT NULL UNIQUE,
                        firstname VARCHAR(50),
                        lastname VARCHAR(50),
                        dob DATE,
@@ -32,15 +34,16 @@ create table events (
                         startsat DATE,
                         endsat DATE,
                         eventtype VARCHAR(10),
-                        performerid VARCHAR(40),
-                        PRIMARY KEY(id),
-                        FOREIGN KEY(performerid) REFERENCES performers(performerid)
+                        PRIMARY KEY(id)
 );
 
 create table tickets (
-                         id INT,
+                         id INT AUTO_INCREMENT NOT NULL,
                          ticketid VARCHAR(40),
-                         purchasetime DATE
+                         purchasetime DATE,
+                         userid VARCHAR(50),
+                         PRIMARY KEY(id),
+                         FOREIGN KEY(userid) REFERENCES users(userid)
 );
 
 create table venues (

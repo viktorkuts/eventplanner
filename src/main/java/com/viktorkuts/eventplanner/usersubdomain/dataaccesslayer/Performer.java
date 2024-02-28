@@ -1,6 +1,7 @@
 package com.viktorkuts.eventplanner.usersubdomain.dataaccesslayer;
 
 import com.viktorkuts.eventplanner.eventmanagementsubdomain.dataaccesslayer.Event;
+import com.viktorkuts.eventplanner.eventmanagementsubdomain.dataaccesslayer.EventIdentifier;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -39,9 +40,6 @@ public class Performer {
 
     @Column(name = "phone")
     private String phone;
-
-//    @OneToMany(mappedBy = "performer", cascade = CascadeType.ALL)
-//    private List<Event> events;
 
     public Performer(@NotNull String firstName, @NotNull String lastName, @NotNull String stageName, @NotNull Date dob, @NotNull String email, @NotNull String phone) {
         this.performerIdentifier = new PerformerIdentifier();

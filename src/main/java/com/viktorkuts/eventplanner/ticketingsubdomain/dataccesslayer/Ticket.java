@@ -1,5 +1,7 @@
 package com.viktorkuts.eventplanner.ticketingsubdomain.dataccesslayer;
 
+import com.viktorkuts.eventplanner.usersubdomain.dataaccesslayer.User;
+import com.viktorkuts.eventplanner.usersubdomain.dataaccesslayer.UserIdentifier;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,4 +22,8 @@ public class Ticket {
 
     @Column(name = "purchasetime")
     private Date purchaseTime;
+
+    @ManyToOne
+    @JoinColumn(name = "userid", referencedColumnName = "userid")
+    private User user;
 }

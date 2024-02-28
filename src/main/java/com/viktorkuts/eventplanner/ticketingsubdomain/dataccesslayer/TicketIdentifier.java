@@ -1,7 +1,7 @@
 package com.viktorkuts.eventplanner.ticketingsubdomain.dataccesslayer;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
+import com.viktorkuts.eventplanner.usersubdomain.dataaccesslayer.User;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.util.UUID;

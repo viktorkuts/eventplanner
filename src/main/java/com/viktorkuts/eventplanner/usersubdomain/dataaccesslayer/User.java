@@ -1,11 +1,15 @@
 package com.viktorkuts.eventplanner.usersubdomain.dataaccesslayer;
 
+import com.viktorkuts.eventplanner.ticketingsubdomain.dataccesslayer.Ticket;
+import com.viktorkuts.eventplanner.ticketingsubdomain.dataccesslayer.TicketIdentifier;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -34,12 +38,15 @@ public class User {
     @Column(name = "phone")
     private String phone;
 
-    public User(@NotNull String firstName, @NotNull String lastName, @NotNull Date dob, @NotNull String email, @NotNull String phone) {
-        this.userIdentifier = new UserIdentifier();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dob = dob;
-        this.email = email;
-        this.phone = phone;
-    }
+    @OneToMany(mappedBy = "user")
+    private Set<Ticket> tickets;
+
+//    public User(@NotNull String firstName, @NotNull String lastName, @NotNull Date dob, @NotNull String email, @NotNull String phone) {
+//        this.userIdentifier = new UserIdentifier();
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.dob = dob;
+//        this.email = email;
+//        this.phone = phone;
+//    }
 }
